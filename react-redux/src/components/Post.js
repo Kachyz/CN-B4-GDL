@@ -9,6 +9,12 @@ class Post extends React.Component {
     this.props.fetch_post()
   }
 
+  componentWillReceiveProps(nextProps){
+    if( nextProps.newPost ){
+      this.props.posts.unshift(nextProps.newPost)
+    }
+  }
+
   render(){
     let postData = this.props.posts.map( post => {
       return(
@@ -30,13 +36,15 @@ class Post extends React.Component {
 
 Post.propTypes = {
   fetch_post: PropTypes.func.isRequired, //fetchPost es una funcion y es requerida (asi lo estamos definiendo)
-  posts: PropTypes.array.isRequired
+  posts: PropTypes.array.isRequired,
+  newPost: PropTypes.object
 }
 
 const mapStateToProps = (state) => (
   {
     posts: state.posts.items,
+    newPost: state.posts.item
   }
 )
 
-export default connect(mapStateToProps, {fetch_post})(Post);
+export default connect(mapStateToProps, {fetch_post})(Post);// Redux le manda como props los items a los componentes

@@ -9,16 +9,18 @@ export const fetch_post = () => dispacher => {
   }))
 }
 
-// export const create_post = () => {
-//   fetch('https://jsonplaceholder.typicode.com/posts',{
-//     method: 'POST',
-//     headers: {
-//       'content-type': 'application/json'
-//     },
-//     body: JSON.stringify(postData)
-//   })
-//   .then( data => data.json())
-//   .then( resp => {
-//     console.log(resp)
-//   })
-// }
+export const create_post = (postData) => dispacher => {
+  fetch('https://jsonplaceholder.typicode.com/posts',{
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify(postData)
+  })
+  .then( data => data.json())
+  .then( resp => dispacher({
+    // console.log(resp)
+    type: NEW_POST,
+    payload: resp
+  }))
+}

@@ -15,7 +15,12 @@ export default function(state = initialState, action){
       }
       break
     case NEW_POST:
-      console.log(action);
+      // console.log(action);
+      return{
+        ...state,
+        item: action.payload
+      }
+
       break
     default:
       console.log('default');
